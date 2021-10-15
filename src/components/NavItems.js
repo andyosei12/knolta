@@ -1,33 +1,41 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { uiActions } from "../store/ui/ui-slice";
 import styles from "../styles/Navbar/NavItems.module.css";
 
 const NavItems = () => {
   const navMenu = useSelector((state) => state.ui.navMenuToggle);
+  const dispatch = useDispatch();
+
+  const closeNavMenuHandler = () => {
+    dispatch(uiActions.closeNavMenu());
+  };
   return (
     <ul
       className={`${
         !navMenu ? styles["nav-items"] : styles["nav-items__active"]
       }`}
+      onClick={closeNavMenuHandler}
     >
       <li className={styles["nav-item"]}>
-        <a href="/home" className={styles["nav-item__link"]}>
+        <NavLink to="/events" className={styles["nav-item__link"]}>
           Upcoming Events
-        </a>
+        </NavLink>
       </li>
       <li className={styles["nav-item"]}>
-        <a href="/home" className={styles["nav-item__link"]}>
+        <NavLink to="/appointment" className={styles["nav-item__link"]}>
           Appointments
-        </a>
+        </NavLink>
       </li>
       <li className={styles["nav-item"]}>
-        <a href="/home" className={styles["nav-item__link"]}>
+        <NavLink to="/liturgy" className={styles["nav-item__link"]}>
           Liturgical Calendar
-        </a>
+        </NavLink>
       </li>
       <li className={styles["nav-item"]}>
-        <a href="/home" className={styles["nav-item__link"]}>
+        <NavLink to="/executives" className={styles["nav-item__link"]}>
           Executives
-        </a>
+        </NavLink>
       </li>
     </ul>
   );

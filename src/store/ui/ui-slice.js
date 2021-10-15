@@ -9,6 +9,9 @@ const uiSlice = createSlice({
     openNavMenu(state) {
       state.navMenuToggle = !state.navMenuToggle;
     },
+    closeNavMenu(state) {
+      state.navMenuToggle = false;
+    },
   },
 });
 
