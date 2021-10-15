@@ -18,6 +18,11 @@ const NavItems = () => {
       onClick={closeNavMenuHandler}
     >
       <li className={styles["nav-item"]}>
+        <NavLink to="/home" className={styles["nav-item__link"]}>
+          Home
+        </NavLink>
+      </li>
+      <li className={styles["nav-item"]}>
         <NavLink to="/events" className={styles["nav-item__link"]}>
           Upcoming Events
         </NavLink>

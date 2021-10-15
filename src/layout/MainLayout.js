@@ -5,7 +5,7 @@ const MainLayout = (props) => {
   return (
     <Fragment>
       <Navbar />
-      {props.children}
+      <main>{props.children}</main>
     </Fragment>
   );
 };

@@ -1,0 +1,39 @@
+.hero {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(#101d2c, 0.9),
+      rgba(#101d2c, 0.9)
+    ),
+    url("../../assets/images/members.jpg");
+  background-size: cover;
+  height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  & h2 {
+    font-size: 3.5rem;
+    margin-top: -15rem;
+    font-family: "Noto Sans Mono", monospac;
+    font-weight: 600;
+    background-image: linear-gradient(to right, #b28451, #6d5d4b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 5rem;
+  }
+
+  & p {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  & h3 {
+    color: var(--color-primary-dark);
+    font-size: 3rem;
+    margin-top: 1.5rem;
+  }
+}
