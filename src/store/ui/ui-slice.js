@@ -4,6 +4,7 @@ const uiSlice = createSlice({
   name: "ui",
   initialState: {
     navMenuToggle: false,
+    loadingSpinner: false,
   },
   reducers: {
     openNavMenu(state) {
@@ -11,6 +12,12 @@ const uiSlice = createSlice({
     },
     closeNavMenu(state) {
       state.navMenuToggle = false;
+    },
+    showLoadingSpinner(state) {
+      state.loadingSpinner = true;
+    },
+    closeLoadingSpinner(state) {
+      state.loadingSpinner = false;
     },
   },
 });

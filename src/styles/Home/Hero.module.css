@@ -22,7 +22,7 @@
 .hero h2 {
   font-size: 3.5rem;
   margin-top: -15rem;
-  font-family: "Noto Sans Mono", monospac;
+  font-family: "Noto Sans Mono", monospace;
   font-weight: 600;
   background-image: -webkit-gradient(linear, left top, right top, from(#b28451), to(#6d5d4b));
   background-image: linear-gradient(to right, #b28451, #6d5d4b);
