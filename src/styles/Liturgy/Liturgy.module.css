@@ -1,0 +1,82 @@
+.liturgy {
+  background-color: var(--color-grey-light-1);
+  padding: 3rem 1.5rem;
+  color: var(--color-secondary);
+  height: calc(100vh - 8rem);
+}
+
+.liturgy__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 1.7rem;
+  font-family: "Noto Sans Mono", monospace;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--color-primary-dark);
+  text-transform: uppercase;
+}
+
+.liturgy__season {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+
+.liturgy__season h3:first-child {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.liturgy__details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.liturgy__details-color {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+.liturgy__details-color h3:last-child {
+  height: 3.5rem;
+  width: 3.5rem;
+  margin-left: 1rem;
+  border-radius: 50%;
+}
+
+.liturgy__celebration {
+  color: var(--color-primary-dark);
+  font-family: "Noto Sans Mono", monospace;
+  font-weight: 800;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=Liturgy.module.css.map */
