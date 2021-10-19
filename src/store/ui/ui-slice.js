@@ -5,6 +5,8 @@ const uiSlice = createSlice({
   initialState: {
     navMenuToggle: false,
     loadingSpinner: false,
+    httpError: null,
+    successRequest: false,
   },
   reducers: {
     openNavMenu(state) {
@@ -18,6 +20,15 @@ const uiSlice = createSlice({
     },
     closeLoadingSpinner(state) {
       state.loadingSpinner = false;
+    },
+    setHttpError(state, action) {
+      state.httpError = action.payload;
+    },
+    setSuccessfulRequest(state) {
+      state.successRequest = true;
+    },
+    removeSuccessfulRequest(state) {
+      state.successRequest = false;
     },
   },
 });

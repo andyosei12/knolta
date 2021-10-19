@@ -1,0 +1,14 @@
+.btn {
+  text-decoration: none;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--color-primary-dark);
+  padding: 1rem 2rem;
+  letter-spacing: 2px;
+  -webkit-box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.6);
+          box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.6);
+  border: none;
+  cursor: pointer;
+}
+/*# sourceMappingURL=PrimaryButton.module.css.map */

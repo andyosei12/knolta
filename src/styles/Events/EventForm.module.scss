@@ -1,0 +1,16 @@
+.form {
+  padding: 1.5rem;
+  background-color: var(--color-grey-light-1);
+  height: calc(100vh - 8rem);
+
+  & h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--color-secondary);
+    margin-block: 1.5rem;
+  }
+
+  & div {
+    margin-bottom: 4rem;
+  }
+}

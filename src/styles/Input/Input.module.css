@@ -1,0 +1,35 @@
+.input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.input__label {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-secondary);
+}
+
+.input__field {
+  width: 85%;
+  padding: 1.3rem 1.5rem;
+  font-size: 1.7rem;
+  color: var(--color-grey-dark-2);
+  border: 2px solid var(--color-secondary);
+  font-family: "Noto Sans Mono", monospace;
+}
+
+.input__field:focus {
+  outline: none;
+}
+/*# sourceMappingURL=Input.module.css.map */
