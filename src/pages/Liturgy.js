@@ -14,7 +14,7 @@ const Liturgy = () => {
     dispatch(uiActions.showLoadingSpinner());
     try {
       const response = await fetch(
-        "http://calapi.inadiutorium.cz/api/v0/en/calendars/default/today"
+        "http://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/today"
       );
 
       if (!response.ok) {
@@ -43,7 +43,7 @@ const Liturgy = () => {
     <section className={styles.liturgy}>
       {loadingSpinner && <Loader />}
       {error && <p>{error}</p>}
-      {liturgyData && !error && (
+      {liturgyData && !error && !loadingSpinner && (
         <Fragment>
           <div className={styles["liturgy__header"]}>
             <h3>{liturgyData.date}</h3>

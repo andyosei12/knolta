@@ -1,5 +1,6 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
+import EventForm from "./pages/EventForm";
 import Appointment from "./pages/Appointment";
 import Events from "./pages/Events";
 import Executives from "./pages/Executives";
@@ -16,8 +17,11 @@ function App() {
         <Route path="/home">
           <Home />
         </Route>
-        <Route path="/events">
+        <Route path="/events" exact>
           <Events />
+        </Route>
+        <Route path="/events/create">
+          <EventForm />
         </Route>
         <Route path="/appointment">
           <Appointment />
