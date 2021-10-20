@@ -45,10 +45,13 @@ const Events = () => {
                 <td>{item.name}</td>
                 <td>{item.venue}</td>
                 <td>
-                  <svg className="action__icons">
-                    <use href={`${icons}#icon-pencil`}></use>
-                  </svg>
-                  <svg className="action__icons">
+                  <Link to={`/events/${item.id}/edit`} className="mr-1">
+                    <svg className="action__icons">
+                      <use href={`${icons}#icon-pencil`}></use>
+                    </svg>
+                  </Link>
+
+                  <svg className="action__icons delete">
                     <use href={`${icons}#icon-trash`}></use>
                   </svg>
                 </td>

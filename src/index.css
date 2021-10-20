@@ -54,10 +54,18 @@ body {
   cursor: pointer;
 }
 
-.action__icons:not(:last-child) {
+.mr-1 {
   margin-right: 1.5rem;
 }
 
-.action__icons:last-child {
+.delete {
   fill: rgb(237, 48, 48);
 }
+
+/* .action__icons:not(:last-child) {
+  margin-right: 1.5rem;
+} */
+
+/* .action__icons:last-child {
+  fill: rgb(237, 48, 48);
+} */

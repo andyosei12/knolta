@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Executives from "./pages/Executives";
 import Home from "./pages/Home";
 import Liturgy from "./pages/Liturgy";
+import EditEvent from "./pages/EditEvent";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path="/events/create">
           <EventForm />
+        </Route>
+        <Route path="/events/:eventId/edit">
+          <EditEvent />
         </Route>
         <Route path="/appointment">
           <Appointment />
