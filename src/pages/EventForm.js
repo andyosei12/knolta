@@ -59,7 +59,7 @@ const EventForm = () => {
           <Loader />
         </div>
       )}
-      {httpError && <p>{httpError}</p>}
+      {httpError && <p className="error__text">{httpError}</p>}
       <form className={styles.form} onSubmit={submitFormHandler}>
         <h3>Add an event</h3>
         {formIsInValid && <p>All fields are required</p>}

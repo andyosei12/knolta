@@ -30,3 +30,34 @@ body {
   font-weight: 400;
   line-height: 1.6;
 }
+
+.error__text {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 30rem);
+  color: rgb(237, 48, 48);
+}
+
+/* .actions {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border: none;
+} */
+
+.action__icons {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.action__icons:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.action__icons:last-child {
+  fill: rgb(237, 48, 48);
+}
