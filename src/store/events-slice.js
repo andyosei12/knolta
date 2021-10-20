@@ -3,9 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const eventSlice = createSlice({
   name: "event",
   initialState: {
-    items: [],
+    events: [],
   },
-  reducers: {},
+  reducers: {
+    getEvents(state, action) {
+      state.events = action.payload;
+    },
+  },
 });
+
+export const eventActions = eventSlice.actions;
 
 export default eventSlice.reducer;
