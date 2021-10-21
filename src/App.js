@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 import MainLayout from "./layout/MainLayout";
 import EventForm from "./pages/EventForm";
 import Appointment from "./pages/Appointment";
@@ -7,8 +9,14 @@ import Executives from "./pages/Executives";
 import Home from "./pages/Home";
 import Liturgy from "./pages/Liturgy";
 import EditEvent from "./pages/EditEvent";
+import DeleteModal from "./components/ui/DeleteModal";
 
 function App() {
+  const [eventId, setEventId] = useState("");
+  const deleteModal = useSelector((state) => state.ui.deleteModal);
+  const confirmDeleteHandler = (id) => {
+    setEventId(id);
+  };
   return (
     <MainLayout>
       <Switch>
@@ -19,7 +27,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/events" exact>
-          <Events />
+          <Events onConfirmDelete={confirmDeleteHandler} />
         </Route>
         <Route path="/events/create">
           <EventForm />
@@ -37,6 +45,7 @@ function App() {
           <Liturgy />
         </Route>
       </Switch>
+      {deleteModal && <DeleteModal eventId={eventId} />}
     </MainLayout>
   );
 }

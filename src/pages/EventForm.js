@@ -60,36 +60,38 @@ const EventForm = () => {
         </div>
       )}
       {httpError && <p className="error__text">{httpError}</p>}
-      <form className={styles.form} onSubmit={submitFormHandler}>
-        <h3>Add an event</h3>
-        {formIsInValid && <p>All fields are required</p>}
-        <Input
-          label="date"
-          ref={dateInputRef}
-          input={{ type: "date", name: "date", placeholder: "Select date" }}
-        />
-        <Input
-          label="event"
-          ref={eventInputRef}
-          input={{
-            type: "text",
-            name: "event",
-            placeholder: "Enter event name",
-          }}
-        />
-        <Input
-          label="venue"
-          ref={venueInputRef}
-          input={{
-            type: "text",
-            name: "venue",
-            placeholder: "Enter event venue",
-          }}
-        />
-        <button type="submit" className={primarybtnstyles.btn}>
-          Submit
-        </button>
-      </form>
+      {!httpError && (
+        <form className={styles.form} onSubmit={submitFormHandler}>
+          <h3>Add an event</h3>
+          {formIsInValid && <p>All fields are required</p>}
+          <Input
+            label="date"
+            ref={dateInputRef}
+            input={{ type: "date", name: "date", placeholder: "Select date" }}
+          />
+          <Input
+            label="event"
+            ref={eventInputRef}
+            input={{
+              type: "text",
+              name: "event",
+              placeholder: "Enter event name",
+            }}
+          />
+          <Input
+            label="venue"
+            ref={venueInputRef}
+            input={{
+              type: "text",
+              name: "venue",
+              placeholder: "Enter event venue",
+            }}
+          />
+          <button type="submit" className={primarybtnstyles.btn}>
+            Submit
+          </button>
+        </form>
+      )}
     </Fragment>
   );
 };

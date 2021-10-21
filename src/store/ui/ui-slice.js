@@ -7,6 +7,8 @@ const uiSlice = createSlice({
     loadingSpinner: false,
     httpError: null,
     successRequest: false,
+    deleteModal: false,
+    confirmDelete: false,
   },
   reducers: {
     openNavMenu(state) {
@@ -29,6 +31,15 @@ const uiSlice = createSlice({
     },
     removeSuccessfulRequest(state) {
       state.successRequest = false;
+    },
+    openDeleteModal(state) {
+      state.deleteModal = true;
+    },
+    closeDeleteModal(state) {
+      state.deleteModal = false;
+    },
+    confirmDelete(state) {
+      state.confirmDelete = !state.confirmDelete;
     },
   },
 });
