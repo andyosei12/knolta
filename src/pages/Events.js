@@ -7,8 +7,9 @@ import btnstyles from "../styles/Button/PrimaryButton.module.css";
 import eventstyles from "../styles/Events/Events.module.css";
 import icons from "../assets/images/sprite.svg";
 import { fetchEvent } from "../store/event-action";
+import { uiActions } from "../store/ui/ui-slice";
 
-const Events = () => {
+const Events = (props) => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.event.events);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
@@ -16,6 +17,12 @@ const Events = () => {
   useEffect(() => {
     dispatch(fetchEvent());
   }, [dispatch]);
+
+  const deleteEventHandler = (id) => {
+    dispatch(uiActions.openDeleteModal());
+    props.onConfirmDelete(id);
+  };
+
   return (
     <section className={eventstyles.events}>
       <Link to="/events/create" className={btnstyles.btn}>
@@ -51,7 +58,10 @@ const Events = () => {
                     </svg>
                   </Link>
 
-                  <svg className="action__icons delete">
+                  <svg
+                    className="action__icons delete"
+                    onClick={deleteEventHandler.bind(null, item.id)}
+                  >
                     <use href={`${icons}#icon-trash`}></use>
                   </svg>
                 </td>

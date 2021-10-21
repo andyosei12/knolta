@@ -69,3 +69,30 @@ export const fetchEvent = () => {
     }
   };
 };
+
+export const deleteEvent = (eventId) => {
+  return async (dispatch) => {
+    dispatch(uiActions.showLoadingSpinner());
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+    };
+
+    try {
+      await sendRequest();
+      dispatch(uiActions.closeLoadingSpinner());
+      dispatch(fetchEvent());
+    } catch (error) {
+      dispatch(uiActions.setHttpError("Something went wrong"));
+      dispatch(uiActions.closeLoadingSpinner());
+    }
+  };
+};

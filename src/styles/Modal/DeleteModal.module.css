@@ -1,0 +1,43 @@
+.delete__header {
+  color: var(--color-secondary);
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.delete__paragraph {
+  font-size: 1.5rem;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.delete__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.delete__actions button {
+  border: none;
+  font-size: 1.7rem;
+  font-family: "Noto Sans Mono", monospace;
+  cursor: pointer;
+}
+
+.delete__actions--confirm {
+  margin-left: 2rem;
+  background-color: #df5a5a;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.delete__actions--cancel {
+  background-color: transparent;
+  color: var(--color-secondary);
+}
+/*# sourceMappingURL=DeleteModal.module.css.map */
