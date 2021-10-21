@@ -10,6 +10,17 @@ const Liturgy = () => {
   const [liturgyData, setLiturgyData] = useState(null);
   const [error, setError] = useState("");
 
+  let date;
+  if (liturgyData) {
+    const year = liturgyData.date.getFullYear();
+    const day = `${liturgyData.date.getDate()}`.padStart(2, 0);
+    // const month = `${liturgyData.date.getMonth() + 1}`.padStart(2, 0);
+    const month = liturgyData.date.toLocaleString("default", {
+      month: "short",
+    });
+    date = `${day}-${month}-${year}`;
+  }
+
   const fetchLiturgy = useCallback(async () => {
     dispatch(uiActions.showLoadingSpinner());
     try {
@@ -22,7 +33,7 @@ const Liturgy = () => {
       }
       const data = await response.json();
       setLiturgyData({
-        date: data.date,
+        date: new Date(data.date),
         liturgy: data.celebrations[0],
         week: data.season_week,
         season: data.season,
@@ -46,7 +57,7 @@ const Liturgy = () => {
       {liturgyData && !error && !loadingSpinner && (
         <Fragment>
           <div className={styles["liturgy__header"]}>
-            <h3>{liturgyData.date}</h3>
+            <h3>{date}</h3>
             <h3>{liturgyData.day}</h3>
           </div>
           <div className={styles["liturgy__season"]}>
