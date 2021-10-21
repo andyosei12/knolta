@@ -6,7 +6,7 @@
 
 .events__table {
   margin-top: 5rem;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   width: 100%;
   border-spacing: 0;
 }
@@ -19,6 +19,6 @@
 
 .events__table th,
 .events__table td {
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.5rem;
 }
 /*# sourceMappingURL=Events.module.css.map */
