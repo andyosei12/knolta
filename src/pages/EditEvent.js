@@ -22,11 +22,8 @@ const EditEvent = () => {
   const [fetchEvent] = useHttp();
   const [sendRequest] = useHttp();
 
-  const applyData = useCallback(async (data) => {
-    try {
-      const event = await data;
-      setEvent(event);
-    } catch (error) {}
+  const applyData = useCallback((data) => {
+    setEvent(data);
   }, []);
 
   const submitFormHandler = (event) => {
