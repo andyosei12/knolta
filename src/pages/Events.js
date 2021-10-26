@@ -1,22 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import useHttp from "../hooks/use-http";
 import Loader from "../components/ui/Loader";
 
 import btnstyles from "../styles/Button/PrimaryButton.module.css";
 import eventstyles from "../styles/Events/Events.module.css";
 import icons from "../assets/images/sprite.svg";
-import { fetchEvent } from "../store/event-action";
+import { eventActions } from "../store/events-slice";
 import { uiActions } from "../store/ui/ui-slice";
 
 const Events = (props) => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.event.events);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
+  const confirmDelete = useSelector((state) => state.ui.confirmDelete);
   const httpError = useSelector((state) => state.ui.httpError);
+  const applyData = useCallback(
+    async (data) => {
+      try {
+        const eventList = await data;
+        const loadedData = [];
+        for (const key in eventList) {
+          loadedData.push({
+            id: key,
+            name: eventList[key].name,
+            venue: eventList[key].venue,
+            date: eventList[key].date,
+          });
+        }
+        dispatch(eventActions.getEvents(loadedData));
+      } catch (error) {}
+    },
+    [dispatch]
+  );
+  const [fetchEvent] = useHttp();
   useEffect(() => {
-    dispatch(fetchEvent());
-  }, [dispatch]);
+    fetchEvent(
+      {
+        url: "https://knolta-beb08-default-rtdb.firebaseio.com/events.json",
+      },
+      applyData,
+      false
+    );
+  }, [fetchEvent, applyData, confirmDelete]);
 
   const deleteEventHandler = (id) => {
     dispatch(uiActions.openDeleteModal());

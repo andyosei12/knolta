@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useCallback, useState, useRef } from "react";
+import { Fragment, useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
-import { uiActions } from "../store/ui/ui-slice";
 import btnStyles from "../styles/Button/PrimaryButton.module.css";
 import formStyles from "../styles/Events/EventForm.module.css";
 import loaderStyles from "../styles/Loader/Loader.module.css";
@@ -16,39 +16,18 @@ const EditEvent = () => {
   const venueRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
-  const dispatch = useDispatch();
   const history = useHistory();
   const { eventId } = params;
 
-  const fetchEvent = useCallback(async () => {
-    dispatch(uiActions.showLoadingSpinner());
-    const response = await fetch(
-      `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`
-    );
+  const [fetchEvent] = useHttp();
+  const [sendRequest] = useHttp();
 
-    if (!response.ok) {
-      throw new Error();
-    }
-    const data = await response.json();
-    setEvent(data);
-    dispatch(uiActions.closeLoadingSpinner());
-  }, [eventId, dispatch]);
-
-  const editRequest = async (data) => {
-    dispatch(uiActions.showLoadingSpinner());
-    const response = await fetch(
-      `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
-      {
-        method: "PUT",
-        body: JSON.stringify(data),
-      }
-    );
-    if (!response.ok) {
-      throw new Error();
-    }
-    dispatch(uiActions.closeLoadingSpinner());
-    history.push("/events");
-  };
+  const applyData = useCallback(async (data) => {
+    try {
+      const event = await data;
+      setEvent(event);
+    } catch (error) {}
+  }, []);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -57,18 +36,21 @@ const EditEvent = () => {
       date: dateRef.current.value,
       venue: venueRef.current.value,
     };
-    editRequest(data).catch((err) => {
-      dispatch(uiActions.setHttpError("Something went wrong"));
-      dispatch(uiActions.closeLoadingSpinner());
-    });
+    sendRequest({
+      url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+      method: "PATCH",
+      body: data,
+    }).then(() => history.push("/events"));
   };
 
   useEffect(() => {
-    fetchEvent().catch((err) => {
-      dispatch(uiActions.setHttpError("Something went wrong"));
-      dispatch(uiActions.closeLoadingSpinner());
-    });
-  }, [fetchEvent, dispatch]);
+    fetchEvent(
+      {
+        url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+      },
+      applyData
+    );
+  }, [fetchEvent, eventId, applyData]);
   return (
     <Fragment>
       {loadingSpinner && (
@@ -95,7 +77,7 @@ const EditEvent = () => {
             ref={venueRef}
             input={{ type: "text", name: "venue", defaultValue: event.venue }}
           />
-          <button className={btnStyles.btn}>Edit</button>
+          <button className={btnStyles.btn}>Update</button>
         </form>
       )}
     </Fragment>

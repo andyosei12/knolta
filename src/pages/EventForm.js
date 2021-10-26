@@ -1,34 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useRef, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Fragment, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-// import { uiActions } from "../store/ui/ui-slice";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
 import styles from "../styles/Events/EventForm.module.css";
 import primarybtnstyles from "../styles/Button/PrimaryButton.module.css";
 import loaderStyles from "../styles/Loader/Loader.module.css";
-import { sendEvent } from "../store/event-action";
-import { uiActions } from "../store/ui/ui-slice";
+import useHttp from "../hooks/use-http";
 
 const EventForm = () => {
   const dateInputRef = useRef();
   const eventInputRef = useRef();
   const venueInputRef = useRef();
   const [formIsInValid, setFormIsInValid] = useState(false);
-  const dispatch = useDispatch();
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const httpError = useSelector((state) => state.ui.httpError);
-  const successRequest = useSelector((state) => state.ui.successRequest);
   const history = useHistory();
-
-  useEffect(() => {
-    if (successRequest) {
-      history.push("/events");
-    }
-    return () => {
-      dispatch(uiActions.removeSuccessfulRequest());
-    };
-  }, [successRequest, history, dispatch]);
+  const [sendEvent] = useHttp();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -37,19 +25,24 @@ const EventForm = () => {
     const eventName = eventInputRef.current.value;
     const venue = venueInputRef.current.value;
 
+    const data = {
+      date,
+      name: eventName,
+      venue,
+    };
+
     if (date.trim() === "" || eventName.trim() === "" || venue.trim() === "") {
       setFormIsInValid(true);
       return;
     } else {
       setFormIsInValid(false);
     }
-    dispatch(
-      sendEvent({
-        date: date,
-        name: eventName,
-        venue: venue,
-      })
-    );
+
+    sendEvent({
+      url: "https://knolta-beb08-default-rtdb.firebaseio.com/events.json",
+      method: "POST",
+      body: data,
+    }).then(() => history.push("/events"));
   };
 
   return (

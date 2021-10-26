@@ -1,15 +1,27 @@
-import React, { useEffect, useState, useCallback, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../store/ui/ui-slice";
+import React, { useEffect, useState, Fragment } from "react";
+import { useSelector } from "react-redux";
 import Loader from "../components/ui/Loader";
 import styles from "../styles/Liturgy/Liturgy.module.css";
+import useHttp from "../hooks/use-http";
 
 const Liturgy = () => {
-  const dispatch = useDispatch();
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
+  const httpError = useSelector((state) => state.ui.httpError);
+  const [fetchData] = useHttp();
   const [liturgyData, setLiturgyData] = useState(null);
-  const [error, setError] = useState("");
 
+  const applyData = async (data) => {
+    try {
+      const liturgy = await data;
+      setLiturgyData({
+        date: new Date(liturgy.date),
+        liturgy: liturgy.celebrations[0],
+        week: liturgy.season_week,
+        season: liturgy.season,
+        day: liturgy.weekday,
+      });
+    } catch (error) {}
+  };
   let date;
   if (liturgyData) {
     const year = liturgyData.date.getFullYear();
@@ -21,40 +33,20 @@ const Liturgy = () => {
     date = `${day}-${month}-${year}`;
   }
 
-  const fetchLiturgy = useCallback(async () => {
-    dispatch(uiActions.showLoadingSpinner());
-    try {
-      const response = await fetch(
-        "http://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/today"
-      );
-
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const data = await response.json();
-      setLiturgyData({
-        date: new Date(data.date),
-        liturgy: data.celebrations[0],
-        week: data.season_week,
-        season: data.season,
-        day: data.weekday,
-      });
-      dispatch(uiActions.closeLoadingSpinner());
-    } catch (error) {
-      dispatch(uiActions.closeLoadingSpinner());
-      setError(error.message);
-    }
-  }, [dispatch]);
-
   useEffect(() => {
-    fetchLiturgy();
-  }, [fetchLiturgy]);
+    fetchData(
+      {
+        url: "http://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/today",
+      },
+      applyData
+    );
+  }, [fetchData]);
 
   return (
     <section className={styles.liturgy}>
       {loadingSpinner && <Loader />}
-      {error && <p>{error}</p>}
-      {liturgyData && !error && !loadingSpinner && (
+      {httpError && <p>{httpError}</p>}
+      {liturgyData && !httpError && !loadingSpinner && (
         <Fragment>
           <div className={styles["liturgy__header"]}>
             <h3>{date}</h3>
