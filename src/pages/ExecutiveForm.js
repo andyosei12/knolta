@@ -1,50 +1,43 @@
-import { useSelector } from "react-redux";
 import { Fragment, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
+
 import styles from "../styles/Form/Form.module.css";
 import primarybtnstyles from "../styles/Button/PrimaryButton.module.css";
 import loaderStyles from "../styles/Loader/Loader.module.css";
-import useHttp from "../hooks/use-http";
 
-const EventForm = () => {
-  const dateInputRef = useRef();
-  const eventInputRef = useRef();
-  const venueInputRef = useRef();
+const ExecutiveForm = () => {
+  const positionInputRef = useRef();
+  const nameInputRef = useRef();
   const [formIsInValid, setFormIsInValid] = useState(false);
+  const [sendRequest] = useHttp();
+  const history = useHistory();
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const httpError = useSelector((state) => state.ui.httpError);
-  const history = useHistory();
-  const [sendEvent] = useHttp();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    const date = dateInputRef.current.value;
-    const eventName = eventInputRef.current.value;
-    const venue = venueInputRef.current.value;
-
     const data = {
-      date,
-      name: eventName,
-      venue,
+      position: positionInputRef.current.value,
+      name: nameInputRef.current.value,
     };
 
-    if (date.trim() === "" || eventName.trim() === "" || venue.trim() === "") {
+    if (data.position.trim() === "" || data.name.trim() === "") {
       setFormIsInValid(true);
       return;
     } else {
       setFormIsInValid(false);
     }
-
-    sendEvent({
-      url: "https://knolta-beb08-default-rtdb.firebaseio.com/events.json",
+    sendRequest({
+      url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives.json`,
       method: "POST",
       body: data,
-    }).then(() => history.push("/events"));
+    }).then(() => history.push("/executives"));
   };
-
   return (
     <Fragment>
       {loadingSpinner && (
@@ -56,28 +49,25 @@ const EventForm = () => {
       {!httpError && (
         <form className={styles.form} onSubmit={submitFormHandler}>
           <h3>Add an event</h3>
-          {formIsInValid && <p>All fields are required</p>}
+          {formIsInValid && (
+            <p className="error__message">All fields are required</p>
+          )}
           <Input
-            label="date"
-            ref={dateInputRef}
-            input={{ type: "date", name: "date", placeholder: "Select date" }}
-          />
-          <Input
-            label="event"
-            ref={eventInputRef}
+            label="position"
+            ref={positionInputRef}
             input={{
               type: "text",
-              name: "event",
-              placeholder: "Enter event name",
+              name: "position",
+              placeholder: "Enter Position",
             }}
           />
           <Input
-            label="venue"
-            ref={venueInputRef}
+            label="name"
+            ref={nameInputRef}
             input={{
               type: "text",
-              name: "venue",
-              placeholder: "Enter event venue",
+              name: "name",
+              placeholder: "Enter name",
             }}
           />
           <button type="submit" className={primarybtnstyles.btn}>
@@ -89,4 +79,4 @@ const EventForm = () => {
   );
 };
 
-export default EventForm;
+export default ExecutiveForm;

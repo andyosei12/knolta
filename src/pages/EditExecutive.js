@@ -1,53 +1,51 @@
-import { Fragment, useEffect, useState, useRef, useCallback } from "react";
+import { useCallback, useEffect, useState, useRef, Fragment } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
+
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
 import btnStyles from "../styles/Button/PrimaryButton.module.css";
 import formStyles from "../styles/Form/Form.module.css";
 import loaderStyles from "../styles/Loader/Loader.module.css";
 
-const EditEvent = () => {
+const EditExecutive = () => {
+  const [fetchExecutive] = useHttp();
+  const [sendRequest] = useHttp();
+  const [executive, setExecutive] = useState(null);
   const params = useParams();
-  const [event, setEvent] = useState(null);
   const nameRef = useRef();
-  const dateRef = useRef();
-  const venueRef = useRef();
+  const positionRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const history = useHistory();
-  const { eventId } = params;
 
-  const [fetchEvent] = useHttp();
-  const [sendRequest] = useHttp();
-
+  const { executiveId } = params;
   const applyData = useCallback((data) => {
-    setEvent(data);
+    setExecutive(data);
   }, []);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
     const data = {
       name: nameRef.current.value,
-      date: dateRef.current.value,
-      venue: venueRef.current.value,
+      position: positionRef.current.value,
     };
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+      url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
       method: "PATCH",
       body: data,
-    }).then(() => history.push("/events"));
+    }).then(() => history.push("/executives"));
   };
 
   useEffect(() => {
-    fetchEvent(
+    fetchExecutive(
       {
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+        url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
       },
       applyData
     );
-  }, [fetchEvent, eventId, applyData]);
+  }, [fetchExecutive, executiveId, applyData]);
   return (
     <Fragment>
       {loadingSpinner && (
@@ -56,23 +54,22 @@ const EditEvent = () => {
         </div>
       )}
       {httpError && <p className="error__text">{httpError}</p>}
-      {!httpError && event && (
+      {!httpError && executive && (
         <form onSubmit={submitFormHandler} className={formStyles.form}>
-          <h3>Edit an event</h3>
+          <h3>Edit Exevutive</h3>
           <Input
-            label="Date"
-            ref={dateRef}
-            input={{ type: "date", name: "date", defaultValue: event.date }}
+            label="Position"
+            ref={positionRef}
+            input={{
+              type: "text",
+              name: "position",
+              defaultValue: executive.position,
+            }}
           />
           <Input
             label="Name"
             ref={nameRef}
-            input={{ type: "text", name: "event", defaultValue: event.name }}
-          />
-          <Input
-            label="Venue"
-            ref={venueRef}
-            input={{ type: "text", name: "venue", defaultValue: event.venue }}
+            input={{ type: "text", name: "name", defaultValue: executive.name }}
           />
           <button className={btnStyles.btn}>Update</button>
         </form>
@@ -81,4 +78,4 @@ const EditEvent = () => {
   );
 };
 
-export default EditEvent;
+export default EditExecutive;
