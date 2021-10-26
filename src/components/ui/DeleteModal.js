@@ -1,20 +1,22 @@
 import { useDispatch } from "react-redux";
+import useHttp from "../../hooks/use-http";
 
 import ModalOverlay from "./ModalOverlay";
 import styles from "../../styles/Modal/DeleteModal.module.css";
 import { uiActions } from "../../store/ui/ui-slice";
-import { deleteEvent } from "../../store/event-action";
 
 const DeleteModal = (props) => {
+  const [deleteEvent] = useHttp();
   const dispatch = useDispatch();
   const closeDeleteModalHandler = () => {
     dispatch(uiActions.closeDeleteModal());
   };
   const confirmDeleteHandler = () => {
-    // dispatch(uiActions.confirmDelete());
-    // console.log(props.eventId);
     dispatch(uiActions.closeDeleteModal());
-    dispatch(deleteEvent(props.eventId));
+    deleteEvent({
+      url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${props.eventId}.json`,
+      method: "DELETE",
+    }).then(() => dispatch(uiActions.confirmDelete()));
   };
   return (
     <ModalOverlay>
