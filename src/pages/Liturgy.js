@@ -10,17 +10,14 @@ const Liturgy = () => {
   const [fetchData] = useHttp();
   const [liturgyData, setLiturgyData] = useState(null);
 
-  const applyData = async (data) => {
-    try {
-      const liturgy = await data;
-      setLiturgyData({
-        date: new Date(liturgy.date),
-        liturgy: liturgy.celebrations[0],
-        week: liturgy.season_week,
-        season: liturgy.season,
-        day: liturgy.weekday,
-      });
-    } catch (error) {}
+  const applyData = (data) => {
+    setLiturgyData({
+      date: new Date(data.date),
+      liturgy: data.celebrations[0],
+      week: data.season_week,
+      season: data.season,
+      day: data.weekday,
+    });
   };
   let date;
   if (liturgyData) {

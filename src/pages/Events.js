@@ -17,20 +17,17 @@ const Events = (props) => {
   const confirmDelete = useSelector((state) => state.ui.confirmDelete);
   const httpError = useSelector((state) => state.ui.httpError);
   const applyData = useCallback(
-    async (data) => {
-      try {
-        const eventList = await data;
-        const loadedData = [];
-        for (const key in eventList) {
-          loadedData.push({
-            id: key,
-            name: eventList[key].name,
-            venue: eventList[key].venue,
-            date: eventList[key].date,
-          });
-        }
-        dispatch(eventActions.getEvents(loadedData));
-      } catch (error) {}
+    (data) => {
+      const loadedData = [];
+      for (const key in data) {
+        loadedData.push({
+          id: key,
+          name: data[key].name,
+          venue: data[key].venue,
+          date: data[key].date,
+        });
+      }
+      dispatch(eventActions.getEvents(loadedData));
     },
     [dispatch]
   );
