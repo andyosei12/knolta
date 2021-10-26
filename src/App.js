@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import Liturgy from "./pages/Liturgy";
 import EditEvent from "./pages/EditEvent";
 import DeleteModal from "./components/ui/DeleteModal";
+import Executiveform from "./pages/ExecutiveForm";
+import EditExecutive from "./pages/EditExecutive";
 
 function App() {
   const [eventId, setEventId] = useState("");
@@ -38,8 +40,14 @@ function App() {
         <Route path="/appointment">
           <Appointment />
         </Route>
-        <Route path="/executives">
+        <Route path="/executives" exact>
           <Executives />
+        </Route>
+        <Route path="/executives/create">
+          <Executiveform />
+        </Route>
+        <Route path="/executives/:executiveId/edit">
+          <EditExecutive />
         </Route>
         <Route path="/liturgy">
           <Liturgy />

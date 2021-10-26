@@ -40,13 +40,10 @@ body {
   color: rgb(237, 48, 48);
 }
 
-/* .actions {
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  border: none;
-} */
+.error__message {
+  font-size: 1.5rem;
+  color: rgb(237, 48, 48);
+}
 
 .action__icons {
   width: 2rem;
