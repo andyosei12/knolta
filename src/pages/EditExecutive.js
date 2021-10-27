@@ -56,7 +56,7 @@ const EditExecutive = () => {
       {httpError && <p className="error__text">{httpError}</p>}
       {!httpError && executive && (
         <form onSubmit={submitFormHandler} className={formStyles.form}>
-          <h3>Edit Exevutive</h3>
+          <h3>Edit Executive</h3>
           <Input
             label="Position"
             ref={positionRef}
