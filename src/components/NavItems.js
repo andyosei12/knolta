@@ -28,7 +28,7 @@ const NavItems = () => {
         </NavLink>
       </li>
       <li className={styles["nav-item"]}>
-        <NavLink to="/appointment" className={styles["nav-item__link"]}>
+        <NavLink to="/appointments" className={styles["nav-item__link"]}>
           Appointments
         </NavLink>
       </li>

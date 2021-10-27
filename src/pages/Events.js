@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
+import moment from "moment";
 import Loader from "../components/ui/Loader";
 
 import btnstyles from "../styles/Button/PrimaryButton.module.css";
@@ -72,7 +73,7 @@ const Events = (props) => {
           <tbody>
             {events.map((item) => (
               <tr key={item.id}>
-                <td>{item.date}</td>
+                <td>{moment(item.date).format("MMM Do, YYYY")}</td>
                 <td>{item.name}</td>
                 <td>{item.venue}</td>
                 <td>

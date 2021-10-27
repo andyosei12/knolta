@@ -1,0 +1,34 @@
+.appointment {
+  padding: 1.5rem;
+  background-color: var(--color-grey-light-1);
+  min-height: calc(100vh - 8rem);
+}
+
+.appointment h2 {
+  margin-top: 3.5rem;
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.appointment__list {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.appointment__list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.appointment__list li h3 {
+  font-size: 1.7rem;
+  color: var(--color-secondary);
+  -ms-flex-preferred-size: 45%;
+      flex-basis: 45%;
+}
+/*# sourceMappingURL=Appointment.module.css.map */

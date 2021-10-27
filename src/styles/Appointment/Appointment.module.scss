@@ -1,0 +1,28 @@
+.appointment {
+  padding: 1.5rem;
+  background-color: var(--color-grey-light-1);
+  min-height: calc(100vh - 8rem);
+
+  h2 {
+    margin-top: 3.5rem;
+    font-size: 2rem;
+    color: var(--color-primary);
+  }
+
+  &__list {
+    margin-top: 1rem;
+    list-style: none;
+
+    & li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+
+      & h3 {
+        font-size: 1.7rem;
+        color: var(--color-secondary);
+        flex-basis: 45%;
+      }
+    }
+  }
+}
