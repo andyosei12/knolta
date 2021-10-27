@@ -13,7 +13,7 @@ const Liturgy = () => {
 
   const applyData = (data) => {
     setLiturgyData({
-      date: new Date(data.date),
+      date: data.date,
       liturgy: data.celebrations[0],
       week: data.season_week,
       season: data.season,
@@ -37,7 +37,7 @@ const Liturgy = () => {
       {liturgyData && !httpError && !loadingSpinner && (
         <Fragment>
           <div className={styles["liturgy__header"]}>
-            <h3>{moment(liturgyData.date).format("do MMMM,YYYY")}</h3>
+            <h3>{moment(liturgyData.date).format("Do MMMM, YYYY")}</h3>
             <h3>{liturgyData.day}</h3>
           </div>
           <div className={styles["liturgy__season"]}>
