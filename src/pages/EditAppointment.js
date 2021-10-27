@@ -66,7 +66,7 @@ const EditAppointment = () => {
       {httpError && <p className="error__text">{httpError}</p>}
       {!httpError && appointment && (
         <form onSubmit={submitFormHandler} className={formStyles.form}>
-          <h3>Edit Exevutive</h3>
+          <h3>Edit Appointment</h3>
           <Input
             label="Date"
             ref={dateInputRef}

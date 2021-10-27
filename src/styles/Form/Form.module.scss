@@ -1,7 +1,7 @@
 .form {
   padding: 1.5rem;
   background-color: var(--color-grey-light-1);
-  height: calc(100vh - 8rem);
+  min-height: calc(100vh - 8rem);
 
   & h3 {
     text-align: center;
