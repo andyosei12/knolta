@@ -56,7 +56,9 @@ const EventForm = () => {
       {!httpError && (
         <form className={styles.form} onSubmit={submitFormHandler}>
           <h3>Add an event</h3>
-          {formIsInValid && <p>All fields are required</p>}
+          {formIsInValid && (
+            <p className="error__message">All fields are required</p>
+          )}
           <Input
             label="date"
             ref={dateInputRef}

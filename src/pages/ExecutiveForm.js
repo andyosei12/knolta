@@ -48,7 +48,7 @@ const ExecutiveForm = () => {
       {httpError && <p className="error__text">{httpError}</p>}
       {!httpError && (
         <form className={styles.form} onSubmit={submitFormHandler}>
-          <h3>Add an event</h3>
+          <h3>Add an executive</h3>
           {formIsInValid && (
             <p className="error__message">All fields are required</p>
           )}

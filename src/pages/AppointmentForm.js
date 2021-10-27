@@ -76,7 +76,7 @@ const AppointmentForm = () => {
             }}
           />
           <Input
-            label="Fisst Acolyte"
+            label="First Acolyte"
             ref={firstAcolyteRef}
             input={{
               type: "text",
