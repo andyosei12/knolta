@@ -32,7 +32,7 @@ const EditExecutive = () => {
       position: positionRef.current.value,
     };
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
+      url: `https://shccknolta-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
       method: "PATCH",
       body: data,
     }).then(() => history.push("/executives"));
@@ -41,7 +41,7 @@ const EditExecutive = () => {
   useEffect(() => {
     fetchExecutive(
       {
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
+        url: `https://shccknolta-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
       },
       applyData
     );

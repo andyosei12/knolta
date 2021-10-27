@@ -34,7 +34,7 @@ const EditEvent = () => {
       venue: venueRef.current.value,
     };
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+      url: `https://shccknolta-default-rtdb.firebaseio.com/events/${eventId}.json`,
       method: "PATCH",
       body: data,
     }).then(() => history.push("/events"));
@@ -43,7 +43,7 @@ const EditEvent = () => {
   useEffect(() => {
     fetchEvent(
       {
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${eventId}.json`,
+        url: `https://shccknolta-default-rtdb.firebaseio.com/events/${eventId}.json`,
       },
       applyData
     );

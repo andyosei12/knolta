@@ -33,7 +33,7 @@ const ExecutiveForm = () => {
       setFormIsInValid(false);
     }
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/executives.json`,
+      url: `https://shccknolta-default-rtdb.firebaseio.com/executives.json`,
       method: "POST",
       body: data,
     }).then(() => history.push("/executives"));

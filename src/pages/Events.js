@@ -36,7 +36,7 @@ const Events = (props) => {
   useEffect(() => {
     fetchEvent(
       {
-        url: "https://knolta-beb08-default-rtdb.firebaseio.com/events.json",
+        url: "https://shccknolta-default-rtdb.firebaseio.com/events.json",
       },
       applyData,
       false

@@ -16,12 +16,12 @@ const DeleteModal = (props) => {
     dispatch(uiActions.closeDeleteModal());
     if (props.eventId) {
       deleteEvent({
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${props.eventId}.json`,
+        url: `https://shccknolta-default-rtdb.firebaseio.com/events/${props.eventId}.json`,
         method: "DELETE",
       }).then(() => dispatch(uiActions.confirmDelete()));
     } else if (props.appointmentId) {
       deleteAppointment({
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/appointments/${props.appointmentId}.json`,
+        url: `https://shccknolta-default-rtdb.firebaseio.com/appointments/${props.appointmentId}.json`,
         method: "DELETE",
       }).then(() => dispatch(uiActions.confirmDelete()));
     }

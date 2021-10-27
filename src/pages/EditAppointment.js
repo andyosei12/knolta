@@ -42,7 +42,7 @@ const EditAppointment = () => {
       boat: boatRef.current.value,
     };
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
+      url: `https://shccknolta-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
       method: "PATCH",
       body: data,
     }).then(() => history.push("/appointments"));
@@ -51,7 +51,7 @@ const EditAppointment = () => {
   useEffect(() => {
     fetchAppointment(
       {
-        url: `https://knolta-beb08-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
+        url: `https://shccknolta-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
       },
       applyData
     );

@@ -49,7 +49,7 @@ const Appointment = (props) => {
   useEffect(() => {
     fetchAppointments(
       {
-        url: "https://knolta-beb08-default-rtdb.firebaseio.com/appointments.json",
+        url: "https://shccknolta-default-rtdb.firebaseio.com//appointments.json",
       },
       applyData,
       false

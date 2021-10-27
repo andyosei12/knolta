@@ -41,7 +41,7 @@ const AppointmentForm = () => {
     };
 
     sendRequest({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/appointments.json`,
+      url: `https://shccknolta-default-rtdb.firebaseio.com/appointments.json`,
       method: "POST",
       body: data,
     }).then(() => history.push("/appointments"));
