@@ -1,7 +1,7 @@
 .form {
   padding: 1.5rem;
   background-color: var(--color-grey-light-1);
-  height: calc(100vh - 8rem);
+  min-height: calc(100vh - 8rem);
 }
 
 .form h3 {
@@ -14,4 +14,4 @@
 .form div {
   margin-bottom: 4rem;
 }
-/*# sourceMappingURL=EventForm.module.css.map */
+/*# sourceMappingURL=Form.module.css.map */
