@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import Loader from "../components/ui/Loader";
 import styles from "../styles/Liturgy/Liturgy.module.css";
 import useHttp from "../hooks/use-http";
@@ -19,16 +20,6 @@ const Liturgy = () => {
       day: data.weekday,
     });
   };
-  let date;
-  if (liturgyData) {
-    const year = liturgyData.date.getFullYear();
-    const day = `${liturgyData.date.getDate()}`.padStart(2, 0);
-    // const month = `${liturgyData.date.getMonth() + 1}`.padStart(2, 0);
-    const month = liturgyData.date.toLocaleString("default", {
-      month: "short",
-    });
-    date = `${day}-${month}-${year}`;
-  }
 
   useEffect(() => {
     fetchData(
@@ -46,7 +37,7 @@ const Liturgy = () => {
       {liturgyData && !httpError && !loadingSpinner && (
         <Fragment>
           <div className={styles["liturgy__header"]}>
-            <h3>{date}</h3>
+            <h3>{moment(liturgyData.date).format("do MMMM,YYYY")}</h3>
             <h3>{liturgyData.day}</h3>
           </div>
           <div className={styles["liturgy__season"]}>

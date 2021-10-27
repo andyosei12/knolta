@@ -47,7 +47,7 @@ const Executives = () => {
         <h3 className="error__text">{httpError}</h3>
       )}
       {!httpError && !loadingSpinner && executives.length === 0 && (
-        <h3 className="error__text">No event available.</h3>
+        <h3 className="error__text">No executive available.</h3>
       )}
 
       {!loadingSpinner && !httpError && executives.length !== 0 && (

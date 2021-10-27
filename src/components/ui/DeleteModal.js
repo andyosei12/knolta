@@ -7,16 +7,24 @@ import { uiActions } from "../../store/ui/ui-slice";
 
 const DeleteModal = (props) => {
   const [deleteEvent] = useHttp();
+  const [deleteAppointment] = useHttp();
   const dispatch = useDispatch();
   const closeDeleteModalHandler = () => {
     dispatch(uiActions.closeDeleteModal());
   };
   const confirmDeleteHandler = () => {
     dispatch(uiActions.closeDeleteModal());
-    deleteEvent({
-      url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${props.eventId}.json`,
-      method: "DELETE",
-    }).then(() => dispatch(uiActions.confirmDelete()));
+    if (props.eventId) {
+      deleteEvent({
+        url: `https://knolta-beb08-default-rtdb.firebaseio.com/events/${props.eventId}.json`,
+        method: "DELETE",
+      }).then(() => dispatch(uiActions.confirmDelete()));
+    } else if (props.appointmentId) {
+      deleteAppointment({
+        url: `https://knolta-beb08-default-rtdb.firebaseio.com/appointments/${props.appointmentId}.json`,
+        method: "DELETE",
+      }).then(() => dispatch(uiActions.confirmDelete()));
+    }
   };
   return (
     <ModalOverlay>

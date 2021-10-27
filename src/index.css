@@ -59,6 +59,10 @@ body {
   fill: rgb(237, 48, 48);
 }
 
+.ta-right {
+  text-align: right !important;
+}
+
 /* .action__icons:not(:last-child) {
   margin-right: 1.5rem;
 } */

@@ -12,12 +12,18 @@ import EditEvent from "./pages/EditEvent";
 import DeleteModal from "./components/ui/DeleteModal";
 import Executiveform from "./pages/ExecutiveForm";
 import EditExecutive from "./pages/EditExecutive";
+import AppointmentForm from "./pages/AppointmentForm";
+import EditAppointment from "./pages/EditAppointment";
 
 function App() {
   const [eventId, setEventId] = useState("");
+  const [appointmentId, setAppointmentId] = useState("");
   const deleteModal = useSelector((state) => state.ui.deleteModal);
   const confirmDeleteHandler = (id) => {
     setEventId(id);
+  };
+  const confirmAppointmentDeleteHandler = (id) => {
+    setAppointmentId(id);
   };
   return (
     <MainLayout>
@@ -37,8 +43,14 @@ function App() {
         <Route path="/events/:eventId/edit">
           <EditEvent />
         </Route>
-        <Route path="/appointment">
-          <Appointment />
+        <Route path="/appointments" exact>
+          <Appointment onConfirmDelete={confirmAppointmentDeleteHandler} />
+        </Route>
+        <Route path="/appointments/create">
+          <AppointmentForm />
+        </Route>
+        <Route path="/appointments/:appointmentId/edit">
+          <EditAppointment />
         </Route>
         <Route path="/executives" exact>
           <Executives />
@@ -53,7 +65,9 @@ function App() {
           <Liturgy />
         </Route>
       </Switch>
-      {deleteModal && <DeleteModal eventId={eventId} />}
+      {deleteModal && (
+        <DeleteModal eventId={eventId} appointmentId={appointmentId} />
+      )}
     </MainLayout>
   );
 }
