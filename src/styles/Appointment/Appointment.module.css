@@ -6,7 +6,7 @@
 
 .appointment h2 {
   margin-top: 3.5rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--color-primary);
 }
 
@@ -26,7 +26,7 @@
 }
 
 .appointment__list li h3 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: var(--color-secondary);
   -ms-flex-preferred-size: 45%;
       flex-basis: 45%;

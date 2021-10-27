@@ -20,7 +20,7 @@
 }
 
 .executives__list li h3 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: var(--color-secondary);
   -ms-flex-preferred-size: 45%;
       flex-basis: 45%;
