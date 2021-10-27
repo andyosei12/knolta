@@ -24,7 +24,7 @@ const Liturgy = () => {
   useEffect(() => {
     fetchData(
       {
-        url: "https://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/today",
+        url: "http://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/today",
       },
       applyData
     );
