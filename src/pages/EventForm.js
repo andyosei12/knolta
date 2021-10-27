@@ -39,7 +39,7 @@ const EventForm = () => {
     }
 
     sendEvent({
-      url: "https://knolta-beb08-default-rtdb.firebaseio.com/events.json",
+      url: "https://shccknolta-default-rtdb.firebaseio.com/events.json",
       method: "POST",
       body: data,
     }).then(() => history.push("/events"));
