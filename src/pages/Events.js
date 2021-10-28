@@ -57,7 +57,7 @@ const Events = (props) => {
       {httpError && !loadingSpinner && (
         <h3 className="error__text">{httpError}</h3>
       )}
-      {!httpError && !loadingSpinner && events.length === 0 && (
+      {!httpError && !loadingSpinner && !events && (
         <h3 className="error__text">No event available.</h3>
       )}
       {!loadingSpinner && !httpError && events.length !== 0 && (
