@@ -21,6 +21,7 @@ const EditAppointment = () => {
   const crossRef = useRef();
   const thurifierRef = useRef();
   const boatRef = useRef();
+  const fmRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const history = useHistory();
@@ -40,6 +41,7 @@ const EditAppointment = () => {
       crossBearer: crossRef.current.value,
       thurifier: thurifierRef.current.value,
       boat: boatRef.current.value,
+      fm: fmRef.current.value,
     };
     sendRequest({
       url: `https://shccknolta-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
@@ -128,6 +130,15 @@ const EditAppointment = () => {
               type: "text",
               name: "boat",
               defaultValue: appointment.boat,
+            }}
+          />
+          <Input
+            label="FM"
+            ref={fmRef}
+            input={{
+              type: "text",
+              name: "fm",
+              defaultValue: appointment.fm,
             }}
           />
           <button className={btnStyles.btn}>Update</button>

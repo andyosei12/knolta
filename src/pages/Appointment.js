@@ -36,6 +36,7 @@ const Appointment = (props) => {
         thurifier: data[key].thurifier,
         boat: data[key].boat,
         date: data[key].date,
+        fm: data[key].fm,
       });
     }
     setAppointments(loadedData);
@@ -64,7 +65,7 @@ const Appointment = (props) => {
       {httpError && !loadingSpinner && (
         <h3 className="error__text">{httpError}</h3>
       )}
-      {!httpError && !loadingSpinner && appointments.length === 0 && (
+      {!httpError && !loadingSpinner && !appointments && (
         <h3 className="error__text">No appointment available.</h3>
       )}
       {!loadingSpinner &&
@@ -108,6 +109,12 @@ const Appointment = (props) => {
                 <li>
                   <h3>Boat Bearer</h3>
                   <h3>{appointment.boat}</h3>
+                </li>
+              )}
+              {appointment.fm && (
+                <li>
+                  <h3>FM</h3>
+                  <h3>{appointment.fm}</h3>
                 </li>
               )}
             </ul>

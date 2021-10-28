@@ -21,6 +21,7 @@ const AppointmentForm = () => {
   const crossRef = useRef();
   const thurifierRef = useRef();
   const boatRef = useRef();
+  const fmRef = useRef();
   const [sendRequest] = useHttp();
   const history = useHistory();
   const httpError = useSelector((state) => state.ui.httpError);
@@ -38,6 +39,7 @@ const AppointmentForm = () => {
       crossBearer: crossRef.current.value,
       thurifier: thurifierRef.current.value,
       boat: boatRef.current.value,
+      fm: fmRef.current.value,
     };
 
     sendRequest({
@@ -118,6 +120,15 @@ const AppointmentForm = () => {
               type: "text",
               name: "boat",
               placeholder: "Boat bearer",
+            }}
+          />
+          <Input
+            label="FM"
+            ref={fmRef}
+            input={{
+              type: "text",
+              name: "fm",
+              placeholder: "Fire Monitor",
             }}
           />
           <button type="submit" className={btnstyles.btn}>
