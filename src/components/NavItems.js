@@ -33,9 +33,14 @@ const NavItems = () => {
         </NavLink>
       </li>
       <li className={styles["nav-item"]}>
-        <NavLink to="/liturgy" className={styles["nav-item__link"]}>
+        <a
+          href="https://bible.usccb.org/readings/calendar"
+          className={styles["nav-item__link"]}
+          target="_blank"
+          rel="noreferrer"
+        >
           Liturgical Calendar
-        </NavLink>
+        </a>
       </li>
       <li className={styles["nav-item"]}>
         <NavLink to="/executives" className={styles["nav-item__link"]}>
