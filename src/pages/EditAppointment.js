@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useRef, Fragment } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 
@@ -24,7 +24,7 @@ const EditAppointment = () => {
   const fmRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { appointmentId } = params;
   const applyData = useCallback((data) => {
@@ -47,7 +47,7 @@ const EditAppointment = () => {
       url: `https://shccknolta-default-rtdb.firebaseio.com/appointments/${appointmentId}.json`,
       method: "PATCH",
       body: data,
-    }).then(() => history.push("/appointments"));
+    }).then(() => navigate("/appointments"));
   };
 
   useEffect(() => {

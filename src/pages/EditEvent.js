@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState, useRef, useCallback } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
@@ -16,7 +16,7 @@ const EditEvent = () => {
   const venueRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { eventId } = params;
 
   const [fetchEvent] = useHttp();
@@ -37,7 +37,7 @@ const EditEvent = () => {
       url: `https://shccknolta-default-rtdb.firebaseio.com/events/${eventId}.json`,
       method: "PATCH",
       body: data,
-    }).then(() => history.push("/events"));
+    }).then(() => navigate("/events"));
   };
 
   useEffect(() => {
