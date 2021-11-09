@@ -1,5 +1,5 @@
 import { Fragment, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
@@ -14,7 +14,7 @@ const ExecutiveForm = () => {
   const nameInputRef = useRef();
   const [formIsInValid, setFormIsInValid] = useState(false);
   const [sendRequest] = useHttp();
-  const history = useHistory();
+  const navigate = useNavigate();
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const httpError = useSelector((state) => state.ui.httpError);
 
@@ -36,7 +36,7 @@ const ExecutiveForm = () => {
       url: `https://shccknolta-default-rtdb.firebaseio.com/executives.json`,
       method: "POST",
       body: data,
-    }).then(() => history.push("/executives"));
+    }).then(() => navigate("/executives"));
   };
   return (
     <Fragment>

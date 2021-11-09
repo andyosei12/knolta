@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useRef, Fragment } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 
@@ -18,7 +18,7 @@ const EditExecutive = () => {
   const positionRef = useRef();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { executiveId } = params;
   const applyData = useCallback((data) => {
@@ -35,7 +35,7 @@ const EditExecutive = () => {
       url: `https://shccknolta-default-rtdb.firebaseio.com/executives/${executiveId}.json`,
       method: "PATCH",
       body: data,
-    }).then(() => history.push("/executives"));
+    }).then(() => navigate("/executives"));
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 // info: import of hooks
 import { Fragment, useRef } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 
@@ -23,7 +23,7 @@ const AppointmentForm = () => {
   const boatRef = useRef();
   const fmRef = useRef();
   const [sendRequest] = useHttp();
-  const history = useHistory();
+  const navigate = useNavigate();
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
 
@@ -46,7 +46,7 @@ const AppointmentForm = () => {
       url: `https://shccknolta-default-rtdb.firebaseio.com/appointments.json`,
       method: "POST",
       body: data,
-    }).then(() => history.push("/appointments"));
+    }).then(() => navigate("/appointments"));
   };
   return (
     <Fragment>

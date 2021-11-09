@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Fragment, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
 import styles from "../styles/Form/Form.module.css";
@@ -15,7 +15,7 @@ const EventForm = () => {
   const [formIsInValid, setFormIsInValid] = useState(false);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const httpError = useSelector((state) => state.ui.httpError);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [sendEvent] = useHttp();
 
   const submitFormHandler = (event) => {
@@ -42,7 +42,7 @@ const EventForm = () => {
       url: "https://shccknolta-default-rtdb.firebaseio.com/events.json",
       method: "POST",
       body: data,
-    }).then(() => history.push("/events"));
+    }).then(() => navigate("/events"));
   };
 
   return (
