@@ -5,8 +5,7 @@ import useHttp from "../hooks/use-http";
 import moment from "moment";
 import Loader from "../components/ui/Loader";
 
-import btnstyles from "../styles/Button/PrimaryButton.module.css";
-import eventstyles from "../styles/Events/Events.module.css";
+import eventstyles from "./Events.module.scss";
 import icons from "../assets/images/sprite.svg";
 import { eventActions } from "../store/events-slice";
 import { uiActions } from "../store/ui/ui-slice";
@@ -50,7 +49,7 @@ const Events = (props) => {
 
   return (
     <section className={eventstyles.events}>
-      <Link to="/events/create" className={btnstyles.btn}>
+      <Link to="/events/create" className="btn">
         Add Event
       </Link>
       {loadingSpinner && <Loader />}

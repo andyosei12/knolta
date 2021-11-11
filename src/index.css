@@ -64,6 +64,19 @@ body {
   text-align: right !important;
 }
 
+.btn {
+  text-decoration: none;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--color-primary-dark);
+  padding: 1rem 2rem;
+  letter-spacing: 2px;
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.6);
+  border: none;
+  cursor: pointer;
+}
+
 /* .action__icons:not(:last-child) {
   margin-right: 1.5rem;
 } */

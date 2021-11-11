@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
-import btnStyles from "../styles/Button/PrimaryButton.module.css";
-import formStyles from "../styles/Form/Form.module.css";
-import loaderStyles from "../styles/Loader/Loader.module.css";
+import formStyles from "./Form.module.scss";
+import loaderStyles from "../components/ui/Loader.module.scss";
 
 const EditEvent = () => {
   const params = useParams();
@@ -74,7 +73,7 @@ const EditEvent = () => {
             ref={venueRef}
             input={{ type: "text", name: "venue", defaultValue: event.venue }}
           />
-          <button className={btnStyles.btn}>Update</button>
+          <button className="btn">Update</button>
         </form>
       )}
     </Fragment>

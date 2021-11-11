@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import Loader from "../components/ui/Loader";
 
 // styles import
-import btnstyles from "../styles/Button/PrimaryButton.module.css";
-import execstyles from "../styles/Executives/Executive.module.css";
+import execstyles from "./Executives.module.scss";
 
 import icons from "../assets/images/sprite.svg";
 
@@ -38,7 +37,7 @@ const Executives = () => {
   }, [fetchEvent, applyData]);
   return (
     <section className={execstyles.executives}>
-      <Link to="/executives/create" className={btnstyles.btn}>
+      <Link to="/executives/create" className="btn">
         Add Executive
       </Link>
 

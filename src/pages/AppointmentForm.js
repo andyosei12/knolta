@@ -9,9 +9,8 @@ import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
 
 // info: import of various styles
-import styles from "../styles/Form/Form.module.css";
-import btnstyles from "../styles/Button/PrimaryButton.module.css";
-import loaderStyles from "../styles/Loader/Loader.module.css";
+import styles from "./Form.module.scss";
+import loaderStyles from "../components/ui/Loader.module.scss";
 
 const AppointmentForm = () => {
   const dateInputRef = useRef();
@@ -131,7 +130,7 @@ const AppointmentForm = () => {
               placeholder: "Fire Monitor",
             }}
           />
-          <button type="submit" className={btnstyles.btn}>
+          <button type="submit" className="btn">
             Submit
           </button>
         </form>

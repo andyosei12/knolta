@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../styles/Navbar/Navbar.module.css";
+import styles from "./Navbar.module.scss";
 import logo from "../assets/images/knolta.jpg";
 import icons from "../assets/images/sprite.svg";
 import NavItems from "./NavItems";
