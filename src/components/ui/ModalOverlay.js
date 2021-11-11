@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui/ui-slice";
-import styles from "../../styles/Modal/Modal.module.css";
+import styles from "./Modal.module.scss";
 
 const Overlay = () => {
   const dispatch = useDispatch();

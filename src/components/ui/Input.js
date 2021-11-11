@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import styles from "../../styles/Input/Input.module.css";
+import styles from "./Input.module.scss";
 
 const Input = forwardRef((props, ref) => {
   return (

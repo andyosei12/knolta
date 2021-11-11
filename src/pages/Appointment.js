@@ -12,8 +12,7 @@ import Loader from "../components/ui/Loader";
 import { uiActions } from "../store/ui/ui-slice";
 
 // info: import styles
-import styles from "../styles/Appointment/Appointment.module.css";
-import btnstyles from "../styles/Button/PrimaryButton.module.css";
+import styles from "./Appointment.module.scss";
 import icons from "../assets/images/sprite.svg";
 
 const Appointment = (props) => {
@@ -58,7 +57,7 @@ const Appointment = (props) => {
   }, [fetchAppointments, applyData, confirmDelete]);
   return (
     <section className={styles.appointment}>
-      <Link to="/appointments/create" className={btnstyles.btn}>
+      <Link to="/appointments/create" className="btn">
         Add Appointment
       </Link>
       {loadingSpinner && <Loader />}

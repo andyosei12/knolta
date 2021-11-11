@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import useHttp from "../../hooks/use-http";
 
 import ModalOverlay from "./ModalOverlay";
-import styles from "../../styles/Modal/DeleteModal.module.css";
+import styles from "./DeleteModal.module.scss";
 import { uiActions } from "../../store/ui/ui-slice";
 
 const DeleteModal = (props) => {

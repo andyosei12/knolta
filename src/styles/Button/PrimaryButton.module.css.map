@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,CAAC;EACH,eAAe,EAAE,IAAI;EACrB,SAAS,EAAE,MAAM;EACjB,cAAc,EAAE,SAAS;EACzB,KAAK,EAAE,IAAI;EACX,gBAAgB,EAAE,yBAAyB;EAC3C,OAAO,EAAE,SAAS;EAClB,cAAc,EAAE,GAAG;EACnB,UAAU,EAAE,CAAC,CAAC,IAAI,CAAC,MAAM,CAAC,kBAAkB;EAC5C,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,OAAO;CAChB",
-    "sources": [
-        "PrimaryButton.module.scss"
-    ],
-    "names": [],
-    "file": "PrimaryButton.module.css"
-}

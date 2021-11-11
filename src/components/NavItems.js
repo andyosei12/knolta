@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { uiActions } from "../store/ui/ui-slice";
-import styles from "../styles/Navbar/NavItems.module.css";
+import styles from "./NavItems.module.scss";
 
 const NavItems = () => {
   const navMenu = useSelector((state) => state.ui.navMenuToggle);

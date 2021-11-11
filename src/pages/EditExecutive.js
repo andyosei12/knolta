@@ -5,9 +5,8 @@ import useHttp from "../hooks/use-http";
 
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
-import btnStyles from "../styles/Button/PrimaryButton.module.css";
-import formStyles from "../styles/Form/Form.module.css";
-import loaderStyles from "../styles/Loader/Loader.module.css";
+import formStyles from "./Form.module.scss";
+import loaderStyles from "../components/ui/Loader.module.scss";
 
 const EditExecutive = () => {
   const [fetchExecutive] = useHttp();
@@ -71,7 +70,7 @@ const EditExecutive = () => {
             ref={nameRef}
             input={{ type: "text", name: "name", defaultValue: executive.name }}
           />
-          <button className={btnStyles.btn}>Update</button>
+          <button className="btn">Update</button>
         </form>
       )}
     </Fragment>

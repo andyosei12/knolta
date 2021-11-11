@@ -3,9 +3,8 @@ import { Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
-import styles from "../styles/Form/Form.module.css";
-import primarybtnstyles from "../styles/Button/PrimaryButton.module.css";
-import loaderStyles from "../styles/Loader/Loader.module.css";
+import styles from "./Form.module.scss";
+import loaderStyles from "../components/ui/Loader.module.scss";
 import useHttp from "../hooks/use-http";
 
 const EventForm = () => {
@@ -82,7 +81,7 @@ const EventForm = () => {
               placeholder: "Enter event venue",
             }}
           />
-          <button type="submit" className={primarybtnstyles.btn}>
+          <button type="submit" className="btn">
             Submit
           </button>
         </form>

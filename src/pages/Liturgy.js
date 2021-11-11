@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Loader from "../components/ui/Loader";
-import styles from "../styles/Liturgy/Liturgy.module.css";
+import styles from "./Liturgy.module.scss";
 import useHttp from "../hooks/use-http";
 
 const Liturgy = () => {
