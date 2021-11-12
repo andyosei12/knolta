@@ -20,6 +20,7 @@ const ExecutiveForm = React.lazy(() => import("./pages/ExecutiveForm"));
 const EditExecutive = React.lazy(() => import("./pages/EditExecutive"));
 
 const Liturgy = React.lazy(() => import("./pages/Liturgy"));
+const Login = React.lazy(() => import("./pages/Login"));
 
 function App() {
   const [eventId, setEventId] = useState("");
@@ -68,6 +69,7 @@ function App() {
           />
 
           <Route path="/liturgy" element={<Liturgy />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
       {deleteModal && (
