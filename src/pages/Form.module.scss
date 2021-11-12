@@ -1,7 +1,18 @@
 .form {
-  padding: 1.5rem;
+  padding: 1.5rem 2.3rem;
   background-color: var(--color-grey-light-1);
   min-height: calc(100vh - 8rem);
+
+  & h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+    color: var(--color-secondary);
+    border-bottom: 3px solid rgb(121, 118, 118);
+    width: min-content;
+    margin-bottom: 3rem;
+    padding-bottom: 0.5rem;
+  }
 
   & h3 {
     text-align: center;
