@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
-import useHttp from "../hooks/use-http";
+import { useRef, useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { uiActions } from "../store/ui/ui-slice";
+import AuthContext from "../auth/auth-context";
 import Input from "../components/ui/Input";
+import Loader from "../components/ui/Loader";
 import styles from "./Form.module.scss";
-
-const transformData = (data) => {
-  console.log(data);
-};
+import loaderStyles from "../components/ui/Loader.module.scss";
 
 const Login = () => {
   const [passwordIsValid, setPasswordIsValid] = useState(false);
@@ -13,7 +13,10 @@ const Login = () => {
   const [inputIsTouched, setInputIsTouched] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const [sendRequest] = useHttp();
+  const dispatch = useDispatch();
+  const httpError = useSelector((state) => state.ui.httpError);
+  const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
+  const authCtx = useContext(AuthContext);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -35,29 +38,48 @@ const Login = () => {
 
     setPasswordIsValid(true);
     setEmailIsValid(true);
+
+    (async function () {
+      try {
+        dispatch(uiActions.showLoadingSpinner());
+        const response = await fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBGoU1U5Ot44r55vIA1XUglDmHyXhRUoic",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email,
+              password,
+              returnSecureToken: true,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Invalid Email or Password. Try again");
+        }
+        const data = await response.json();
+        if (data.idToken) {
+          authCtx.login(data.idToken);
+        }
+      } catch (error) {
+        dispatch(uiActions.setHttpError(error.message));
+      } finally {
+        dispatch(uiActions.closeLoadingSpinner());
+      }
+    })();
   };
 
-  // if (emailIsValid && passwordIsValid) {
-  //   const data = {
-  //     email: emailInputRef.current.value,
-  //     password: passwordInputRef.current.value,
-  //     returnSecureToken: true,
-  //   };
-  //   sendRequest(
-  //     {
-  //       url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBGoU1U5Ot44r55vIA1XUglDmHyXhRUoic`,
-  //       method: "POST",
-  //       body: data,
-  //       // headers: {
-  //       //   "Content-Type": "application/json",
-  //       // },
-  //     },
-  //     transformData
-  //   );
-  // }
   return (
     <form onSubmit={submitFormHandler} className={styles.form}>
       <h1>Login</h1>
+      {loadingSpinner && (
+        <div className={loaderStyles.loading}>
+          <Loader />
+        </div>
+      )}
+      {httpError && <p className="error__message">{httpError}</p>}
       {!emailIsValid && inputIsTouched && (
         <p className="error__message">Enter a valid email</p>
       )}
