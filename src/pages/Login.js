@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
+import useHttp from "../hooks/use-http";
 import Input from "../components/ui/Input";
 import styles from "./Form.module.scss";
+
+const transformData = (data) => {
+  console.log(data);
+};
 
 const Login = () => {
   const [passwordIsValid, setPasswordIsValid] = useState(false);
@@ -8,26 +13,48 @@ const Login = () => {
   const [inputIsTouched, setInputIsTouched] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const [sendRequest] = useHttp();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    console.log("Form is submitted");
     setInputIsTouched(true);
 
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
 
-    if (email.includes("@")) {
-      setEmailIsValid(true);
+    if (!email.includes("@") || password.length < 7) {
+      if (email.includes("@")) {
+        setEmailIsValid(true);
+        return;
+      }
+      if (password.length > 7) {
+        setPasswordIsValid(true);
+        return;
+      }
     }
-    if (password.trim().length >= 7) {
-      setPasswordIsValid(true);
-    }
+
+    setPasswordIsValid(true);
+    setEmailIsValid(true);
   };
 
-  if (emailIsValid && passwordIsValid) {
-    console.log("You will be logged in");
-  }
+  // if (emailIsValid && passwordIsValid) {
+  //   const data = {
+  //     email: emailInputRef.current.value,
+  //     password: passwordInputRef.current.value,
+  //     returnSecureToken: true,
+  //   };
+  //   sendRequest(
+  //     {
+  //       url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBGoU1U5Ot44r55vIA1XUglDmHyXhRUoic`,
+  //       method: "POST",
+  //       body: data,
+  //       // headers: {
+  //       //   "Content-Type": "application/json",
+  //       // },
+  //     },
+  //     transformData
+  //   );
+  // }
   return (
     <form onSubmit={submitFormHandler} className={styles.form}>
       <h1>Login</h1>
