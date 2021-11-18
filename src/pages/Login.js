@@ -1,5 +1,6 @@
 import { useRef, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { uiActions } from "../store/ui/ui-slice";
 import AuthContext from "../auth/auth-context";
 import Input from "../components/ui/Input";
@@ -17,6 +18,7 @@ const Login = () => {
   const httpError = useSelector((state) => state.ui.httpError);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -61,7 +63,11 @@ const Login = () => {
         }
         const data = await response.json();
         if (data.idToken) {
-          authCtx.login(data.idToken);
+          const remainingTime = new Date(
+            new Date().getTime() + +data.expiresIn * 1000
+          );
+          authCtx.login(data.idToken, remainingTime.toISOString());
+          navigate(-1);
         }
       } catch (error) {
         dispatch(uiActions.setHttpError(error.message));
