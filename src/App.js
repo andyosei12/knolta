@@ -1,11 +1,13 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MainLayout from "./layout/MainLayout";
+import AuthContext from "./auth/auth-context";
 
 import Home from "./pages/Home";
 import DeleteModal from "./components/ui/DeleteModal";
 import Loader from "./components/ui/Loader";
+import RequireAuth from "./auth/RequireAuth";
 
 const EventForm = React.lazy(() => import("./pages/EventForm"));
 const Events = React.lazy(() => import("./pages/Events"));
@@ -26,6 +28,7 @@ function App() {
   const [eventId, setEventId] = useState("");
   const [appointmentId, setAppointmentId] = useState("");
   const deleteModal = useSelector((state) => state.ui.deleteModal);
+  const authCtx = useContext(AuthContext);
   const confirmDeleteHandler = (id) => {
     setEventId(id);
   };
@@ -48,7 +51,14 @@ function App() {
             path="/events"
             element={<Events onConfirmDelete={confirmDeleteHandler} />}
           />
-          <Route path="/events/create" element={<EventForm />} />
+          <Route
+            path="/events/create"
+            element={
+              <RequireAuth>
+                <EventForm />
+              </RequireAuth>
+            }
+          />
           <Route path="/events/:eventId/edit" element={<EditEvent />} />
           <Route
             path="/appointments"
@@ -56,20 +66,35 @@ function App() {
               <Appointment onConfirmDelete={confirmAppointmentDeleteHandler} />
             }
           />
-          <Route path="/appointments/create" element={<AppointmentForm />} />
+          <Route
+            path="/appointments/create"
+            element={
+              <RequireAuth>
+                <AppointmentForm />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/appointments/:appointmentId/edit"
             element={<EditAppointment />}
           />
           <Route path="/executives" element={<Executives />} />
-          <Route path="/executives/create" element={<ExecutiveForm />} />
+          <Route
+            path="/executives/create"
+            element={
+              <RequireAuth>
+                <ExecutiveForm />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/executives/:executiveId/edit"
             element={<EditExecutive />}
           />
 
           <Route path="/liturgy" element={<Liturgy />} />
-          <Route path="/login" element={<Login />} />
+          {!authCtx.isLoggedIn && <Route path="/login" element={<Login />} />}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
       {deleteModal && (

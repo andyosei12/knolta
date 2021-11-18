@@ -1,9 +1,10 @@
 // info: import hooks and features
 import { Link } from "react-router-dom";
-import { useCallback, useState, useEffect, Fragment } from "react";
+import { useCallback, useState, useEffect, Fragment, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useHttp from "../hooks/use-http";
 import moment from "moment";
+import AuthContext from "../auth/auth-context";
 
 // info: components import
 import Loader from "../components/ui/Loader";
@@ -22,6 +23,7 @@ const Appointment = (props) => {
   const httpError = useSelector((state) => state.ui.httpError);
   const confirmDelete = useSelector((state) => state.ui.confirmDelete);
   const dispatch = useDispatch();
+  const authCtx = useContext(AuthContext);
 
   const applyData = useCallback((data) => {
     const loadedData = [];
@@ -117,20 +119,23 @@ const Appointment = (props) => {
                 </li>
               )}
             </ul>
-            <div className="ta-right mr-1">
-              <Link to={`/appointments/${appointment.id}/edit`}>
-                <svg className="action__icons mr-1 ">
-                  <use href={`${icons}#icon-pencil`}></use>
-                </svg>
-              </Link>
 
-              <svg
-                className="action__icons delete"
-                onClick={deleteEventHandler.bind(null, appointment.id)}
-              >
-                <use href={`${icons}#icon-trash`}></use>
-              </svg>
-            </div>
+            {authCtx.isLoggedIn && (
+              <div className="ta-right mr-1">
+                <Link to={`/appointments/${appointment.id}/edit`}>
+                  <svg className="action__icons mr-1 ">
+                    <use href={`${icons}#icon-pencil`}></use>
+                  </svg>
+                </Link>
+
+                <svg
+                  className="action__icons delete"
+                  onClick={deleteEventHandler.bind(null, appointment.id)}
+                >
+                  <use href={`${icons}#icon-trash`}></use>
+                </svg>
+              </div>
+            )}
           </Fragment>
         ))}
     </section>

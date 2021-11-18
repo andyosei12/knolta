@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
 import { Link } from "react-router-dom";
@@ -9,11 +9,13 @@ import Loader from "../components/ui/Loader";
 import execstyles from "./Executives.module.scss";
 
 import icons from "../assets/images/sprite.svg";
+import AuthContext from "../auth/auth-context";
 
 const Executives = () => {
   const [executives, setExecutives] = useState([]);
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const httpError = useSelector((state) => state.ui.httpError);
+  const authCtx = useContext(AuthContext);
   const applyData = useCallback((data) => {
     const loadedData = [];
     for (const key in data) {
@@ -55,11 +57,13 @@ const Executives = () => {
             <li key={executive.id}>
               <h3>{executive.position}</h3>
               <h3>{executive.name}</h3>
-              <Link to={`/executives/${executive.id}/edit`}>
-                <svg className="action__icons">
-                  <use href={`${icons}#icon-pencil`}></use>
-                </svg>
-              </Link>
+              {authCtx.isLoggedIn && (
+                <Link to={`/executives/${executive.id}/edit`}>
+                  <svg className="action__icons">
+                    <use href={`${icons}#icon-pencil`}></use>
+                  </svg>
+                </Link>
+              )}
             </li>
           ))}
         </ul>

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../hooks/use-http";
@@ -9,6 +9,7 @@ import eventstyles from "./Events.module.scss";
 import icons from "../assets/images/sprite.svg";
 import { eventActions } from "../store/events-slice";
 import { uiActions } from "../store/ui/ui-slice";
+import AuthContext from "../auth/auth-context";
 
 const Events = (props) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Events = (props) => {
   const loadingSpinner = useSelector((state) => state.ui.loadingSpinner);
   const confirmDelete = useSelector((state) => state.ui.confirmDelete);
   const httpError = useSelector((state) => state.ui.httpError);
+  const authCtx = useContext(AuthContext);
   const applyData = useCallback(
     (data) => {
       const loadedData = [];
@@ -66,7 +68,7 @@ const Events = (props) => {
               <th>Date</th>
               <th>Event</th>
               <th>Venue</th>
-              <th>Actions</th>
+              {authCtx.isLoggedIn && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -75,20 +77,22 @@ const Events = (props) => {
                 <td>{moment(item.date).format("MMM Do, YYYY")}</td>
                 <td>{item.name}</td>
                 <td>{item.venue}</td>
-                <td>
-                  <Link to={`/events/${item.id}/edit`} className="mr-1">
-                    <svg className="action__icons">
-                      <use href={`${icons}#icon-pencil`}></use>
-                    </svg>
-                  </Link>
+                {authCtx.isLoggedIn && (
+                  <td>
+                    <Link to={`/events/${item.id}/edit`} className="mr-1">
+                      <svg className="action__icons">
+                        <use href={`${icons}#icon-pencil`}></use>
+                      </svg>
+                    </Link>
 
-                  <svg
-                    className="action__icons delete"
-                    onClick={deleteEventHandler.bind(null, item.id)}
-                  >
-                    <use href={`${icons}#icon-trash`}></use>
-                  </svg>
-                </td>
+                    <svg
+                      className="action__icons delete"
+                      onClick={deleteEventHandler.bind(null, item.id)}
+                    >
+                      <use href={`${icons}#icon-trash`}></use>
+                    </svg>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
