@@ -1,12 +1,15 @@
-.navbar {
+.header {
   height: 8rem;
   background-color: var(--color-secondary);
   padding: 1.5rem;
   position: relative;
   display: flex;
   justify-content: space-between;
+  // z-index: 100000;
+  // overflow: hidden;
 
   &__logo {
+    // flex-basis: 60%;
     display: flex;
     align-items: center;
 
@@ -21,11 +24,4 @@
   height: 5rem;
   border-radius: 2.5rem;
   margin-right: 1rem;
-}
-
-.menu {
-  width: 5rem;
-  height: 5rem;
-  fill: var(--color-grey-dark-1);
-  cursor: pointer;
 }
