@@ -77,10 +77,10 @@ body {
   cursor: pointer;
 }
 
-/* .action__icons:not(:last-child) {
-  margin-right: 1.5rem;
-} */
-
-/* .action__icons:last-child {
-  fill: rgb(237, 48, 48);
-} */
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  top: auto;
+  overflow: hidden;
+}
